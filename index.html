@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrategias de Prevención</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo"> <img class="images" src="assets/Logo.png" /></div>
+    <nav>
+      <p>Dejar el consumo de sustancias es un proceso que puede ser apoyado con actividades que fomenten la salud integral.</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="text-content">
+        <p class="subtitle">Promoviendo hábitos saludables para una vida plena.</p>
+        <h1>Estrategias de Prevencion al Consumo de Sustancias</h1>
+        <p class="description">
+          Este espacio busca mostrar alternativas reales y accesibles para fomentar una vida equilibrada. Ya sea mediante la actividad física como el CrossFit, expresiones creativas o conexiones sociales positivas, cada acción cuenta en la construcción de un camino libre de adicciones.
+        </p>
+        <div class="buttons">
+          <a href="https://www.facebook.com/CobaepP11/?locale=es_LA" target="_blank" rel="noopener noreferrer" class="buy-button">
+            Facebook
+          </a>
+          <a href="http://www.cobaep.edu.mx/" target="_blank" rel="noopener noreferrer" class="info-button">Mas info</a>
+        </div>
+      </div>
+      <div class="text-content">
+        <section class="video-carousel">
+          <div class="carousel-container">
+            <h2>Entrevista</h1>
+            <div class="carousel-track">
+              <div class="carousel-slide">
+                <video src="assets/videos/VID_1.mp4" controls autoplay playsinline></video>
+              </div>
+              <div class="carousel-slide">
+                <video src="assets/videos/VID_2.mp4" controls playsinline></video>
+              </div>
+              <div class="carousel-slide">
+                <video src="assets/videos/VID_3.mp4" controls playsinline></video>
+              </div>
+              <div class="carousel-slide">
+                <video src="assets/videos/VID_4.mp4" controls playsinline></video>
+              </div>
+            </div>
+            <button class="carousel-btn prev">&#10094;</button>
+            <button class="carousel-btn next">&#10095;</button>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="two-cards-section">
+      <div class="card" style="width: fit-content;">
+        <img class="images" src="assets/Cartel6.png" style="width: 600px;"/>
+      </div>
+      <div class="card">
+        <h1>"Las drogas son caras, ¿Por Qué? Porque te quita la familia, te quita amigos, te quita el sentido común, incluso te puede costar la vida, no solo lo económico"</p>
+      </div>
+    </section>
+
+    <section class="cards-section">
+      <h2>Actividades saludables y recursos para una vida libre de adicciones</h2>
+      <div class="cards">
+          <div class="card">
+            <h3>Físicas</h3>
+            <ul>
+              <li>Senderismo o caminata por la naturaleza</li>
+              <li>Deportes como fútbol o voleibol</li>
+              <li>Entrenamiento funcional o CrossFit</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Mentales y emocionales</h3>
+            <ul>
+              <li>Escuchar podcasts motivacionales</li>
+              <li>Practicar la gratitud y la reflexión</li>
+              <li>Conversaciones profundas con personas de confianza</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Creativas</h3>
+            <ul>
+              <li>Pintar, dibujar o escribir</li>
+              <li>Tocar instrumentos o cantar</li>
+              <li>Cocinar recetas nuevas</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Sociales</h3>
+            <ul>
+              <li>Participar en talleres y actividades grupales</li>
+              <li>Asistir a eventos culturales</li>
+              <li>Formar parte de voluntariados</li>
+            </ul>
+          </div>
+        </div>
+    </section>
+    <section class="cards-section">
+      <div class="cards">
+        <div class="card">
+          <h3>Cuida tu Salud</h3>
+          <p>Explora alternativas positivas que fortalecen tu bienestar físico, emocional y social mientras construyes una vida libre de adicciones.</p>
+          <img class="images" src="assets/Cartel1.jpeg" />
+          <!-- <button>Order Now</button> -->
+        </div>
+        <div class="card">
+          <h3>Actividades Físicas</h3>
+          <p>El ejercicio puede ser una herramienta poderosa para ayudar a superar las adicciones, tanto por sus beneficios físicos como emocionales y sociales</p>
+          <img class="images" src="assets/Cartel2.jpeg" />
+          <!-- <button>Order Now</button> -->
+        </div>
+        <div class="card">
+          <h3>Amarrate a la Vida</h3>
+          <p>Explora alternativas positivas que fortalecen tu bienestar físico, emocional y social mientras construyes una vida libre de adicciones.</p>
+          <img class="images" src="assets/Cartel5.jpeg" />
+          <!-- <button>Order Now</button> -->
+        </div>
+        <div class="card">
+          <h3>Causas</h3>
+          <p>Comprender sus causas es el primer paso para prevenirlas y buscar soluciones efectivas.</p>
+          <img class="images" src="assets/Cartel4.jpeg" />
+          <!-- <button>Order Now</button> -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contacto: (764) 7-64-07-10 | Colegio de Bachilleres del Estado de Puebla Plantel 11</p>
+  </footer>
+</body>
+<script>
+  const track = document.querySelector('.carousel-track');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const videos = document.querySelectorAll('.carousel-slide video');
+  const nextBtn = document.querySelector('.next');
+  const prevBtn = document.querySelector('.prev');
+
+  let index = 0;
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    videos.forEach((video, i) => {
+      if (i === index) {
+        video.currentTime = 0;
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  }
+
+  nextBtn.addEventListener('click', () => {
+    index = (index + 1) % slides.length;
+    updateCarousel();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    index = (index - 1 + slides.length) % slides.length;
+    updateCarousel();
+  });
+
+  // Detecta cuando termina el video y cambia al siguiente
+  videos.forEach((video, i) => {
+    video.addEventListener('ended', () => {
+      if (i === index) {
+        index = (index + 1) % slides.length;
+        updateCarousel();
+      }
+    });
+  });
+
+  // Iniciar reproducción del primero al cargar
+  window.addEventListener('load', () => {
+    updateCarousel();
+  });
+</script>
+
+
+</html>
