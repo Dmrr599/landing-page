@@ -30,12 +30,12 @@ nav a {
   justify-content: space-around;
   padding: 2rem;
 }
-
+/* 
 .video-container iframe {
   width: 320px;
   height: 180px;
   border-radius: 10px;
-}
+} */
 
 .text-content {
   max-width: 600px;
@@ -180,10 +180,10 @@ footer {
 
 .two-cards-section {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
   padding: 2rem;
-  flex-wrap: wrap;
 }
 
 .two-cards-section .card {
@@ -191,18 +191,45 @@ footer {
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 1.5rem;
-  width: 500px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .two-cards-section .card:hover {
   transform: scale(1.03);
 }
 
-.two-cards-section .card .images{
+.two-cards-section .images {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 10px;
   background-color: #2d1457;
+}
+
+.quote {
+  line-height: 1.5;
+  font-size: 3rem;
+  margin: 0.5rem 0;
+  color: #2d1457;
+}
+
+/* Responsivo para pantallas menores a 768px */
+@media (max-width: 768px) {
+  .quote {
+    font-size: 1.2rem;
+  }
+}
+
+/* Responsivo para pantallas menores a 480px (muy pequeñas) */
+@media (max-width: 480px) {
+  .quote {
+    font-size: 1rem;
+  }
 }
 
 .images {
@@ -215,7 +242,7 @@ footer {
 
 .carousel-container {
   position: relative;
-  width: 100%; /* ✅ SOLO MITAD DE LA PANTALLA */
+  width: 100%;
   overflow: hidden;
   border-radius: 8px;
 }
@@ -227,13 +254,9 @@ footer {
 
 .carousel-slide {
   min-width: 100%;
-}
-
-.carousel-slide video {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carousel-btn {
@@ -250,9 +273,10 @@ footer {
 }
 
 .carousel-btn.prev {
-  left: -40px;
+  left: 10px;
 }
 
 .carousel-btn.next {
-  right: -40px;
+  right: 10px;
 }
+
