@@ -6,6 +6,7 @@
   <title>Estrategias de Prevención</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+<script src="https://www.youtube.com/iframe_api"></script>
 <body>
   <header>
     <div class="logo"> <img class="images" src="assets/Logo.png" /></div>
@@ -35,16 +36,19 @@
             <h2>Entrevista</h1>
             <div class="carousel-track">
               <div class="carousel-slide">
-                <video src="assets/videos/VID_1.mp4" controls autoplay playsinline></video>
+                <!-- <video src="https://youtu.be/-qT160Olhl4" controls autoplay playsinline></video> -->
+                <!-- <video src="assets/videos/VID_1.mp4" controls autoplay playsinline></video> -->
+
+                <iframe id="ytplayer0" width="560" height="315" src="https://www.youtube.com/embed/-qT160Olhl4?si=VPZsE03x84Kbeehp?enablejsapi=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <div class="carousel-slide">
-                <video src="assets/videos/VID_2.mp4" controls playsinline></video>
+                <iframe id="ytplayer1" width="560" height="315" src="https://www.youtube.com/embed/SX8n2bgm550?si=tknQqkEKPPAMfgh1?enablejsapi=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <div class="carousel-slide">
-                <video src="assets/videos/VID_3.mp4" controls playsinline></video>
+                <iframe id="ytplayer2" width="560" height="315" src="https://www.youtube.com/embed/e4XAD_K3yxk?si=_9MWukr5OdTqZDoC?enablejsapi=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <div class="carousel-slide">
-                <video src="assets/videos/VID_4.mp4" controls playsinline></video>
+                <iframe id="ytplayer3" width="560" height="315" src="https://www.youtube.com/embed/fYit4-s5Pis?si=pzdaeqCWoJkzvwxe?enablejsapi=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
             </div>
             <button class="carousel-btn prev">&#10094;</button>
@@ -58,7 +62,7 @@
         <img class="images" src="assets/Cartel6.png" style="width: 600px;"/>
       </div>
       <div class="card">
-        <h1>"Las drogas son caras, ¿Por Qué? Porque te quita la familia, te quita amigos, te quita el sentido común, incluso te puede costar la vida, no solo lo económico"</p>
+        <h1 class="quote">"Las drogas son caras, ¿Por Qué? Porque te quita la familia, te quita amigos, te quita el sentido común, incluso te puede costar la vida, no solo lo económico"</h1>
       </div>
     </section>
 
@@ -133,52 +137,61 @@
     <p>Contacto: (764) 7-64-07-10 | Colegio de Bachilleres del Estado de Puebla Plantel 11</p>
   </footer>
 </body>
+
 <script>
-  const track = document.querySelector('.carousel-track');
-  const slides = document.querySelectorAll('.carousel-slide');
-  const videos = document.querySelectorAll('.carousel-slide video');
-  const nextBtn = document.querySelector('.next');
-  const prevBtn = document.querySelector('.prev');
+  let players = [];
+  let currentIndex = 0;
 
-  let index = 0;
-
-  function updateCarousel() {
-    track.style.transform = `translateX(-${index * 100}%)`;
-    videos.forEach((video, i) => {
-      if (i === index) {
-        video.currentTime = 0;
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
+  function onYouTubeIframeAPIReady() {
+    for (let i = 0; i < 4; i++) {
+      players[i] = new YT.Player('ytplayer' + i, {
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
   }
 
-  nextBtn.addEventListener('click', () => {
-    index = (index + 1) % slides.length;
-    updateCarousel();
+  function onPlayerStateChange(event) {
+    // 0 = video terminado
+    if (event.data === YT.PlayerState.ENDED) {
+      currentIndex = (currentIndex + 1) % players.length;
+      goToSlide(currentIndex);
+      players[currentIndex].playVideo();
+    }
+  }
+
+  function goToSlide(index) {
+    const track = document.querySelector('.carousel-track');
+    currentIndex = index;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  // Navegación manual
+  document.querySelector('.next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % players.length;
+    goToSlide(currentIndex);
+    players[currentIndex].playVideo();
   });
 
-  prevBtn.addEventListener('click', () => {
-    index = (index - 1 + slides.length) % slides.length;
-    updateCarousel();
+  document.querySelector('.prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + players.length) % players.length;
+    goToSlide(currentIndex);
+    players[currentIndex].playVideo();
   });
 
-  // Detecta cuando termina el video y cambia al siguiente
-  videos.forEach((video, i) => {
-    video.addEventListener('ended', () => {
-      if (i === index) {
-        index = (index + 1) % slides.length;
-        updateCarousel();
-      }
-    });
-  });
-
-  // Iniciar reproducción del primero al cargar
+  // Inicia el primer video automáticamente
   window.addEventListener('load', () => {
-    updateCarousel();
+    const interval = setInterval(() => {
+      if (players[0] && players[0].playVideo) {
+        players[0].playVideo();
+        clearInterval(interval);
+      }
+    }, 500);
   });
 </script>
+
+
 
 
 </html>
